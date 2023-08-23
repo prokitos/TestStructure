@@ -16,6 +16,7 @@ void lList::insert(int d)
         lastNode->next = tmp;
         lastNode = tmp;
     }
+    elementCount ++;
 
 };
 
@@ -46,6 +47,10 @@ void lList::deleteFirst()
         firstNode = NULL;
         delete temp;
     }
+
+    if(elementCount > 0)
+        elementCount --;
+    
 };
 
 void lList::deleteLast()
@@ -61,4 +66,66 @@ void lList::deleteLast()
     delete lastNode;
     lastNode = temp;
     lastNode->next = NULL;
+
+    if(elementCount > 0)
+    elementCount --;
+};
+
+// удаление элемента по ссылке
+void lList::deletePtr(lListNode* ptrs, lListNode* prev)
+{
+    prev->next = ptrs->next;
+    delete ptrs;
+};
+
+// удаление в середине
+void lList::deleteAtMiddle()
+{
+    if(elementCount > 2)
+    {
+        lListNode* temp = firstNode;
+        for (size_t i = 1; i < elementCount / 2; i++)
+        {
+            temp = temp->next;
+        }
+        deletePtr(temp->next, temp);
+    }
+};
+
+void lList::polyndromCheck()
+{
+    lListNode* temp = firstNode;
+    int mass[elementCount] = {};
+    bool polyFlag = true;
+    int j = 0;
+
+    // нахождение середины массива, с которого начинается проверка
+    if(elementCount % 2)
+        j = (elementCount / 2);
+    else
+        j = (elementCount / 2) - 1;
+
+    // перебор всех элементов списка
+    for (size_t i = 0; i < elementCount; i++)
+    {
+        mass[i] = temp->field;
+
+        // начинается проверка на полиндром
+        if(i >= elementCount / 2 && polyFlag == true)
+        {
+            if(mass[j] != mass[i])
+                polyFlag = false;
+            
+            j --;
+        }
+
+        temp = temp->next;
+    }
+
+    // вывод результата
+    if(polyFlag == true)
+        std::cout << "! is polyndrom " << std::endl;
+    else
+        std::cout << "! not polyndrom " << std::endl;
+    
 };

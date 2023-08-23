@@ -122,11 +122,15 @@ void templList()
 
     deb.insert(1);
     deb.insert(5);
-    deb.insert(2);
-    deb.insert(11);
+    deb.insert(3);
+    deb.insert(3);
+    deb.insert(5);
+    deb.insert(1);
 
     //deb.deleteLast();
-    deb.deleteFirst();
+    //deb.deleteFirst();
+    //deb.deleteAtMiddle();
+    deb.polyndromCheck();
 
     deb.showAll();
 }
@@ -143,13 +147,13 @@ int main()
     //cout << k << std::endl;
 
     //tempGraph();
-    tempStack();
+    //tempStack();
     
     //tempHash();
 
     //system("pause");
 
-    //templList();
+    templList();
     
 
     return 0;
