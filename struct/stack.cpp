@@ -97,3 +97,164 @@ void stack::showAll()
         temp = temp->prev;
     }
 };
+
+
+
+
+//
+//
+//      ноВЫЙ стеК
+//
+//
+
+
+void threeStack::pushOne(int data)
+{
+    int pos = massPieceAddCheck(1);
+    if(pos >= 0)
+    {
+        pushAt(pos,data);
+    }
+};
+void threeStack::pushTwo(int data)
+{
+    int pos = massPieceAddCheck(2);
+    if(pos >= 0)
+    {
+        pushAt(pos,data);
+    }
+};
+void threeStack::pushThree(int data)
+{
+    int pos = massPieceAddCheck(3);
+    if(pos >= 0)
+    {
+        pushAt(pos,data);
+    }
+};
+void threeStack::pushAt(int pos, int data)
+{
+    dataMass[pos] = data;
+};
+
+
+void threeStack::popOne()
+{
+
+};
+void threeStack::popTwo()
+{
+
+};
+void threeStack::popThree()
+{
+
+};
+void threeStack::popAt(int pos)
+{
+    dataMass[pos] = 0;
+};
+
+
+// вывод всех стеков
+void threeStack::showAll()
+{
+
+    std::cout << "Первый стек: ";
+    for (size_t i = 0; i < 10; i++)
+    {
+        if(pieceOwner[i] == 1)
+        {
+            int bonusPos = i * pieceWide;
+            for (size_t j = 0; j < pieceWide; j++)
+            {
+                std::cout << dataMass[j + bonusPos] << " ";
+            }
+        }
+    }
+    std::cout << std::endl;
+
+    std::cout << "Второй стек: ";
+    for (size_t i = 0; i < 10; i++)
+    {
+        if(pieceOwner[i] == 2)
+        {
+            int bonusPos = i * pieceWide;
+            for (size_t j = 0; j < pieceWide; j++)
+            {
+                std::cout << dataMass[j + bonusPos] << " ";
+            }
+        }
+    }
+    std::cout << std::endl;
+
+    std::cout << "Третий стек: ";
+    for (size_t i = 0; i < 10; i++)
+    {
+        if(pieceOwner[i] == 3)
+        {
+            int bonusPos = i * pieceWide;
+            for (size_t j = 0; j < pieceWide; j++)
+            {
+                std::cout << dataMass[j + bonusPos] << " ";
+            }
+        }
+    }
+    std::cout << std::endl;
+
+};
+
+
+// можно ли удалять элемент
+bool threeStack::deleteAviable(int stackNumber)
+{
+
+    return false;
+};
+
+// можно ли добавлять элемент
+bool threeStack::insertAviable(int stackNumber)
+{
+
+
+    return false;
+};
+
+// проверка и выделение областей перед добавлением
+int threeStack::massPieceAddCheck(int stackNumber)
+{
+    // проверка владельцев частей массива, и вывод элемента для записи
+    for (size_t i = 0; i < 10; i++)
+    {
+        // если уже есть область этого стека, и там есть место
+        if (pieceOwner[i] == stackNumber && pieceElements[i] < pieceWide)
+        {
+            int pos = (i * pieceWide) +  pieceElements[i];
+            pieceElements[i] ++;
+            return pos;
+        }
+        
+        // если нет мест в области = выделение новой
+        if(pieceOwner[i] == 0)
+        {
+            pieceOwner[i] = stackNumber;
+            int pos = (i * pieceWide) +  pieceElements[i];
+            pieceElements[i] ++;
+            return pos;
+        }
+
+        if(i == 9)
+        {
+            std::cout << "массив заполнен!!!, освободите стеки " << std::endl;
+        }
+    }
+    return -1;
+
+};
+
+// проверка и вывод места для удаления
+void threeStack::massPieceDelCheck(int stackNumber)
+{
+
+};
+

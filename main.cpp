@@ -43,23 +43,47 @@ void tempHash()
 
 void tempStack()
 {
-    stack deb;
-    deb.push(5);
-    deb.push(6);
-    deb.push(1);
-    deb.push(4);
-    deb.push(2);
+    //stack deb;
+    //deb.push(5);
+    //deb.push(6);
+    //deb.push(1);
+    //deb.push(4);
+    //deb.push(2);
     
     //deb.pop();
 
-    deb.popAt(3);
-    deb.showAll();
+    //deb.popAt(3);
+    //deb.showAll();
 
     //deb.pop();
     //cout << deb.minimum();
     //deb.pop();
 
     //cout << deb.peek();
+
+    
+    // 3 стека из одного массива
+    threeStack* stck = new threeStack(5);
+
+    stck->pushOne(4);
+    stck->pushOne(5);
+    stck->pushOne(6);
+    stck->pushOne(7);
+    stck->pushOne(9);
+
+    stck->pushTwo(5);
+    stck->pushTwo(3);
+    stck->pushTwo(7);
+    stck->pushTwo(1);
+ 
+
+    stck->pushThree(2);
+    stck->pushThree(1);
+    stck->pushThree(2);
+
+    stck->showAll();
+
+
 }
 
 void tempQueue()
@@ -147,13 +171,14 @@ int main()
     //cout << k << std::endl;
 
     //tempGraph();
-    //tempStack();
+    
     
     //tempHash();
 
     //system("pause");
 
-    templList();
+    tempStack();
+    //templList();
     
 
     return 0;
