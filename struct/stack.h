@@ -55,6 +55,19 @@ public:
         if(stackSize >= 50)
             massPieces = 10;
 
+        // если размер массива не делится нацело
+        if(stackSize % massPieces == 0)
+        {
+            isSizeOdd = false;
+        }
+        else
+        {
+            isSizeOdd = true;
+            pieceCustom = stackSize % massPieces;
+            massPieces ++;
+        }
+            
+
         // количество элементов в одной части
         pieceWide = stackSize / massPieces;
 
@@ -62,10 +75,6 @@ public:
         // 6 частей в массиве если больше 12 элементов          макс потеря 28%
         // 4 части если меньше 12 элементов..                   макс потеря 30%
         // макс потеря если в двух стеках будет только по одному элементу.
-        
-        // также будет массивчик из 10 элементов, и там будет хранится владелец каждой части массива
-        // 0 = никто, 1 = первый стек, 2 = второй и тд
-        // значит вывод элементов тоже будет легким - просто выводить все части которые с текущим номером
 
     };
 
@@ -94,10 +103,13 @@ public:
 
 private:
     int* dataMass;
-    int stackSize;
+    int stackSize = 20;
 
     int pieceOwner[10] {};
     int pieceElements[10]{};
     int massPieces;
     int pieceWide;
+
+    bool isSizeOdd;
+    int pieceCustom = 0;
 };

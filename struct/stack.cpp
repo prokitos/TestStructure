@@ -140,19 +140,19 @@ void threeStack::pushAt(int pos, int data)
 
 void threeStack::popOne()
 {
-
+    massPieceDelCheck(1);
 };
 void threeStack::popTwo()
 {
-
+    massPieceDelCheck(2);
 };
 void threeStack::popThree()
 {
-
+    massPieceDelCheck(3);
 };
 void threeStack::popAt(int pos)
 {
-    dataMass[pos] = 0;
+    dataMass[pos]  = 0;
 };
 
 
@@ -166,7 +166,7 @@ void threeStack::showAll()
         if(pieceOwner[i] == 1)
         {
             int bonusPos = i * pieceWide;
-            for (size_t j = 0; j < pieceWide; j++)
+            for (size_t j = 0; j < pieceElements[i]; j++)
             {
                 std::cout << dataMass[j + bonusPos] << " ";
             }
@@ -180,7 +180,7 @@ void threeStack::showAll()
         if(pieceOwner[i] == 2)
         {
             int bonusPos = i * pieceWide;
-            for (size_t j = 0; j < pieceWide; j++)
+            for (size_t j = 0; j < pieceElements[i]; j++)
             {
                 std::cout << dataMass[j + bonusPos] << " ";
             }
@@ -194,7 +194,7 @@ void threeStack::showAll()
         if(pieceOwner[i] == 3)
         {
             int bonusPos = i * pieceWide;
-            for (size_t j = 0; j < pieceWide; j++)
+            for (size_t j = 0; j < pieceElements[i]; j++)
             {
                 std::cout << dataMass[j + bonusPos] << " ";
             }
@@ -224,8 +224,21 @@ bool threeStack::insertAviable(int stackNumber)
 int threeStack::massPieceAddCheck(int stackNumber)
 {
     // проверка владельцев частей массива, и вывод элемента для записи
-    for (size_t i = 0; i < 10; i++)
+    for (size_t i = 0; i < massPieces; i++)
     {
+        // последняя область кастомного размера
+        if(i == massPieces - 1 && isSizeOdd == true && pieceOwner[i] == stackNumber && pieceElements[i] < pieceWide)
+        {
+            if(pieceElements[i] < pieceCustom)
+            {
+                int pos = (i * pieceWide) +  pieceElements[i];
+                pieceElements[i] ++;
+                return pos;
+            }
+
+            return -1;
+        }
+        
         // если уже есть область этого стека, и там есть место
         if (pieceOwner[i] == stackNumber && pieceElements[i] < pieceWide)
         {
@@ -243,7 +256,7 @@ int threeStack::massPieceAddCheck(int stackNumber)
             return pos;
         }
 
-        if(i == 9)
+        if(i == massPieces - 1)
         {
             std::cout << "массив заполнен!!!, освободите стеки " << std::endl;
         }
@@ -256,5 +269,31 @@ int threeStack::massPieceAddCheck(int stackNumber)
 void threeStack::massPieceDelCheck(int stackNumber)
 {
 
+    for (size_t i = 9; i >= 0; i--)
+    {
+        if (pieceOwner[i] == stackNumber && pieceElements[i] > 0)
+        {
+            int pos = (i * pieceWide) +  pieceElements[i];
+            popAt(pos - 1);
+            pieceElements[i] --;
+
+            if(pieceElements[i] == 0)
+            {
+                pieceOwner[i] = 0;
+            }
+
+            break;
+        }
+
+        if(i == 0)
+        {
+            std::cout << "нет элементов для удаления " << std::endl;
+            break;
+        }
+    }
+
 };
 
+
+
+// добавить последний стек, элементов = остатки от деления на 10 6 и 4

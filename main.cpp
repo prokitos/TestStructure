@@ -65,21 +65,24 @@ void tempStack()
     // 3 стека из одного массива
     threeStack* stck = new threeStack(5);
 
-    stck->pushOne(4);
-    stck->pushOne(5);
-    stck->pushOne(6);
-    stck->pushOne(7);
-    stck->pushOne(9);
+    stck->pushOne(11);
+    stck->pushOne(12);
+    stck->pushOne(13);
+    stck->pushOne(14);
 
-    stck->pushTwo(5);
-    stck->pushTwo(3);
-    stck->pushTwo(7);
-    stck->pushTwo(1);
- 
+    stck->pushTwo(21);
+    stck->pushTwo(22);
+    stck->pushTwo(23);
+    stck->pushTwo(24);
+    stck->pushTwo(25);
+    stck->pushTwo(27);
 
-    stck->pushThree(2);
-    stck->pushThree(1);
-    stck->pushThree(2);
+    stck->pushThree(31);
+    stck->pushThree(32);
+    stck->pushThree(33);
+    stck->pushThree(34);
+    stck->pushThree(35);
+    stck->pushThree(36);
 
     stck->showAll();
 
