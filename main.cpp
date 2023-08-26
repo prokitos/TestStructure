@@ -180,8 +180,9 @@ int main()
 
     //system("pause");
 
-    tempStack();
+    //tempStack();
     //templList();
+
     
 
     return 0;
