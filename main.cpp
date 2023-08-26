@@ -145,21 +145,48 @@ void tempGraph()
 
 void templList()
 {
-    lList deb;
+    //lList deb;
 
-    deb.insert(1);
-    deb.insert(5);
-    deb.insert(3);
-    deb.insert(3);
-    deb.insert(5);
-    deb.insert(1);
+    // deb.insert(1);
+    // deb.insert(5);
+    // deb.insert(3);
+    // deb.insert(3);
+    // deb.insert(5);
+    // deb.insert(1);
 
     //deb.deleteLast();
     //deb.deleteFirst();
     //deb.deleteAtMiddle();
-    deb.polyndromCheck();
+    // deb.polyndromCheck();
+
+    // deb.showAll();
+
+    
+
+    // КОЛЬЦЕВОЙ связный список
+
+    lList deb;
+
+    deb.insert(1);
+    deb.insert(5);
+    deb.insert(8);
+    deb.insert(3);
+    deb.insert(7);
+    deb.insert(5);
+    deb.insert(1);
+    deb.insert(4);
+    deb.insert(2);
+    deb.insert(9);
+    deb.lastElemCreateBound(3);
 
     deb.showAll();
+    deb.searchCycleStart();
+
+    // 1 5 3 3 7
+    //     9   5
+    //     2 4 1
+
+
 }
 
 int main()
@@ -181,7 +208,7 @@ int main()
     //system("pause");
 
     //tempStack();
-    //templList();
+    templList();
 
     
 

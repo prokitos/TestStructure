@@ -25,13 +25,19 @@ void lList::show(lListNode* nod)
     if(nod != NULL)
     {
         cout << nod->field << " ";
-        show(nod->next);
     }
 };
 
 void lList::showAll()
 {
-    show(firstNode);
+
+    lListNode* temp = firstNode;
+    for (size_t i = 0; i < elementCount; i++)
+    {
+        show(temp);
+        temp = temp->next;
+    }
+    
 };
 
 void lList::deleteFirst()
@@ -128,4 +134,46 @@ void lList::polyndromCheck()
     else
         std::cout << "! not polyndrom " << std::endl;
     
+};
+
+// добавление ссылки для кольцевого связного списка.
+void lList::lastElemCreateBound(int num)
+{
+    if(num > 0 && num < elementCount)
+    {
+        lListNode* temp = firstNode;
+
+        for (size_t i = 0; i < num; i++)
+        {
+            temp = temp->next;
+        }
+        
+        lastNode->next = temp;
+
+    }
+};
+
+void lList::searchCycleStart()
+{
+    if(elementCount > 0)
+    {
+        lListNode* slow = firstNode;
+
+        for (size_t i = 0; i < elementCount; i++)
+        {
+            lListNode* fast = slow->next;
+            for (size_t j = 0; j < elementCount; j++)
+            {
+                if(fast == slow)
+                {
+                    std::cout << std::endl << "Кольцо начинается на значении " << slow->field << " и на позиции " << i;
+                    return;
+                }
+                fast = fast->next;
+            }
+            slow = slow->next;
+        }
+        
+
+    }
 };

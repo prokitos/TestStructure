@@ -27,6 +27,7 @@ public:
         {
             lListNode* temp = firstNode;
             firstNode = firstNode->next;
+            temp = NULL;
             delete temp;
         }
     }
@@ -40,7 +41,9 @@ public:
     void deleteAtMiddle();  // удалить элемент в середине списка
     void polyndromCheck();  // проверка списка на полиндром
 
+    void lastElemCreateBound(int num); // Добавить ссылку с посденего элемента на элемент с позицией N
+    void searchCycleStart();  // поиск начала цикла
+
 private:
     int elementCount = 0;
 };
-
