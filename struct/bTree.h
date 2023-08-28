@@ -32,7 +32,7 @@ class tree
     void insert(int item);  // вставка элемента в дерево
 
     void standartdisplayBinTree();  
-    void standartprintBinTree(tnode*);  
+    void standartprintBinTree(tnode*, string& result);  
 
     void firstdisplayBinTree();  
     void firstprintBinTree(tnode*);  
@@ -42,4 +42,7 @@ class tree
 
     void deleteAllNode();
     void deleteNode(tnode*);
+
+    // нормальное отображение элементов дерева в терминале
+    void printTreeStr(string input);
 };

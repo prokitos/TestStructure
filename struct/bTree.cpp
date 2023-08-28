@@ -1,5 +1,7 @@
 #include "bTree.h"
-
+#include <iterator>    
+#include <sstream>
+#include <vector>
 
 
 void tree::insert(int item)
@@ -35,7 +37,9 @@ void tree::insert(int item)
 
 void tree::standartdisplayBinTree()
 {
-    standartprintBinTree(root);
+    std::string result = {};
+    standartprintBinTree(root,result);
+    printTreeStr(result);
 }
 void tree::firstdisplayBinTree()
 {
@@ -46,13 +50,38 @@ void tree::lastdisplayBinTree()
     lastprintBinTree(root);
 }
 
-void tree::standartprintBinTree(tnode* nodes)
+void tree::printTreeStr(string input)
+{
+    // из строки в вектор, для удобства
+    std::vector<std::string> output;     
+    std::istringstream iss(input);
+    std::copy(std::istream_iterator<string>(iss), std::istream_iterator<string>(), std::back_inserter(output));
+    
+    // перебор и нормальны форматированный вывод
+    int iterator = 0;
+    int maxIterator = 1;
+    for(auto x : output)
+    {
+        if(iterator == maxIterator)
+        {
+            maxIterator = maxIterator * 2;
+            iterator = 0;
+            cout << std::endl;
+        }
+            cout << x << " ";
+        iterator ++;
+    }
+        
+    
+}
+
+void tree::standartprintBinTree(tnode* nodes, string& result)
 {
     if(nodes != NULL)
     {
-        standartprintBinTree(nodes->left);
-        cout << "  " << nodes->field;
-        standartprintBinTree(nodes->right);
+        standartprintBinTree(nodes->left, result);
+        result += std::to_string(nodes->field) + " ";
+        standartprintBinTree(nodes->right, result);
     }
 }
 void tree::firstprintBinTree(tnode* nodes)

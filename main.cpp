@@ -189,6 +189,23 @@ void templList()
 
 }
 
+void tempBtree()
+{
+    tree btr;
+
+    btr.insert(1);
+    btr.insert(7);
+    btr.insert(4);
+    btr.insert(9);
+    btr.insert(14);
+    btr.insert(7);
+    btr.insert(3);
+    btr.insert(7);
+
+    btr.standartdisplayBinTree();
+
+};
+
 int main()
 {
     consoleClear();
@@ -208,9 +225,9 @@ int main()
     //system("pause");
 
     //tempStack();
-    templList();
-
-    
+    //templList();
+    tempBtree();
+        
 
     return 0;
 }
