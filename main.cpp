@@ -204,7 +204,8 @@ void tempBtree()
     btr.insert(3);
     btr.insert(7);
 
-    //btr.deleteNodeNum(9);
+    // удаление ноды
+    btr.deleteNodeNum(1);
 
     // красивое отображение
     // btr.standartdisplayBinTree();

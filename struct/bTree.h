@@ -50,5 +50,5 @@ class tree
     // удаление ноды со свдигом
     void deleteNodeNum(int);
     void deleteSpecNode(tnode*);
-    tnode* nodeStartSearch(tnode* node, int numb, tnode &temp);
+    void nodeStartSearch(tnode* node, int numb, tnode** output);
 };

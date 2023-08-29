@@ -128,31 +128,35 @@ void tree::deleteNode(tnode* curNode)
 }
 
 
-// удаление ноды по позиции, считая слева на право
+// удаление ноды по числу
 void tree::deleteNodeNum(int numb)
 {
+    tnode** temp = new tnode*;
+    nodeStartSearch(root, numb, temp);
+    tnode* tempers = *temp;
 
-    tnode* temp;
-    nodeStartSearch(root, numb, *temp);
-    deleteSpecNode(temp);
+    if(tempers->left != NULL || tempers->right != NULL)
+    deleteSpecNode(tempers);
+
+    delete temp;
 }
 
-tnode* tree::nodeStartSearch(tnode* node, int numb, tnode& temp)
+// поиск указателя на число
+void tree::nodeStartSearch(tnode* node, int numb, tnode** output)
 {
     if(node->field == numb)
     {
-        temp = *node;
+        *output = node;
     }
 
     if(node->left != NULL)
-        nodeStartSearch(node->left,numb, temp);
+        nodeStartSearch(node->left,numb,output);
     if(node->right != NULL)
-        nodeStartSearch(node->right,numb, temp);
+        nodeStartSearch(node->right,numb,output);
 
-    return node;
 }
 
-
+// удаление элемента по указателю
 void tree::deleteSpecNode(tnode* curNode)
 {
 
@@ -178,6 +182,19 @@ void tree::deleteSpecNode(tnode* curNode)
             temp = temp->left;
         }
     }
+
+
+    // для теста по новому алгоритму
+    temp = curNode;
+    if(temp->right != NULL)
+        temp = temp->right;
+    
+    while (temp->left != NULL)
+    {
+        tempOwner = temp;
+        temp = temp->left;
+    }
+    
     
     // ставим последний элемент в начало
     curNode->field = temp->field;
@@ -193,18 +210,36 @@ void tree::deleteSpecNode(tnode* curNode)
     tnode* swapper = curNode;
     while (swapper->right != NULL || swapper->left != NULL)
     {
-        if(swapper->right != NULL)
-            if(swapper->field > swapper->right->field)
-            {
-                std::swap(swapper->field,swapper->right->field);
-                swapper = swapper->right;
-            }
-        else if(swapper->left != NULL)
-            if(swapper->field > swapper->left->field)
+        if(swapper->left != NULL)
+        {
+            if(swapper->field >= swapper->left->field)
             {
                 std::swap(swapper->field,swapper->left->field);
                 swapper = swapper->left;
             }
+            else if(swapper->right != NULL)
+            {
+                swapper = swapper->right;
+            }
+            else
+                break;
+        }
+        else if(swapper->right != NULL)
+        {
+            if(swapper->field >= swapper->right->field)
+            {
+                std::swap(swapper->field,swapper->right->field);
+                swapper = swapper->right;
+            }
+            else if(swapper->left != NULL)
+            {
+                swapper = swapper->left;
+            }
+            else
+                break;
+        }
+        else 
+            break;
     }
 
 }
