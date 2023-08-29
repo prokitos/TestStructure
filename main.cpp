@@ -193,6 +193,8 @@ void tempBtree()
 {
     tree btr;
 
+    btr.insert(8);
+    btr.insert(11);
     btr.insert(1);
     btr.insert(7);
     btr.insert(4);
@@ -202,7 +204,13 @@ void tempBtree()
     btr.insert(3);
     btr.insert(7);
 
-    btr.standartdisplayBinTree();
+    //btr.deleteNodeNum(9);
+
+    // красивое отображение
+    // btr.standartdisplayBinTree();
+
+    // правильное отображение   
+    btr.firstdisplayBinTree();
 
 };
 

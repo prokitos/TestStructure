@@ -40,9 +40,15 @@ class tree
     void lastdisplayBinTree();  
     void lastprintBinTree(tnode*);  
 
+    // просто удаление всех элементов
     void deleteAllNode();
     void deleteNode(tnode*);
 
     // нормальное отображение элементов дерева в терминале
     void printTreeStr(string input);
+
+    // удаление ноды со свдигом
+    void deleteNodeNum(int);
+    void deleteSpecNode(tnode*);
+    tnode* nodeStartSearch(tnode* node, int numb, tnode &temp);
 };

@@ -43,12 +43,19 @@ void tree::standartdisplayBinTree()
 }
 void tree::firstdisplayBinTree()
 {
-    firstprintBinTree(root);
+    cout << "узел = " << root->field << std::endl;
+
+    cout << "Левая ветка = ";
+    firstprintBinTree(root->left);
+
+    cout << std::endl << "Правая ветка = ";
+    firstprintBinTree(root->right);
 }
 void tree::lastdisplayBinTree()
 {
     lastprintBinTree(root);
 }
+
 
 void tree::printTreeStr(string input)
 {
@@ -118,4 +125,86 @@ void tree::deleteNode(tnode* curNode)
         deleteNode(curNode->right);
     }
     delete curNode;
+}
+
+
+// удаление ноды по позиции, считая слева на право
+void tree::deleteNodeNum(int numb)
+{
+
+    tnode* temp;
+    nodeStartSearch(root, numb, *temp);
+    deleteSpecNode(temp);
+}
+
+tnode* tree::nodeStartSearch(tnode* node, int numb, tnode& temp)
+{
+    if(node->field == numb)
+    {
+        temp = *node;
+    }
+
+    if(node->left != NULL)
+        nodeStartSearch(node->left,numb, temp);
+    if(node->right != NULL)
+        nodeStartSearch(node->right,numb, temp);
+
+    return node;
+}
+
+
+void tree::deleteSpecNode(tnode* curNode)
+{
+
+    // просто удаление если нет наследников.
+    if(curNode->left == NULL && curNode->right == NULL)
+    {
+        delete curNode;
+        return;
+    }
+
+    // находим самый больший элемент. и записываем его родителя
+    tnode* temp = curNode;
+    tnode* tempOwner;
+    while (temp->right != NULL || temp->left != NULL)
+    {
+        tempOwner = temp;
+        if(temp->right != NULL)
+        {
+            temp = temp->right;
+        }
+        else if(temp->left != NULL)
+        {
+            temp = temp->left;
+        }
+    }
+    
+    // ставим последний элемент в начало
+    curNode->field = temp->field;
+
+    // удаляем последний элемент, и ссылки на него.
+    if(tempOwner->left == temp)
+        tempOwner->left = NULL;
+    else 
+        tempOwner->right = NULL;
+    delete temp;
+
+    // прогон большого значения вниз.
+    tnode* swapper = curNode;
+    while (swapper->right != NULL || swapper->left != NULL)
+    {
+        if(swapper->right != NULL)
+            if(swapper->field > swapper->right->field)
+            {
+                std::swap(swapper->field,swapper->right->field);
+                swapper = swapper->right;
+            }
+        else if(swapper->left != NULL)
+            if(swapper->field > swapper->left->field)
+            {
+                std::swap(swapper->field,swapper->left->field);
+                swapper = swapper->left;
+            }
+    }
+
 }
